@@ -19,7 +19,8 @@ const F1 = () => {
 
   const isEventCompleted = (eventDate, eventTime) => {
     const eventDateTime = new Date(eventDate + "T" + eventTime);
-    return new Date() > eventDateTime;
+    const eventDateTimePlus90 = new Date(eventDateTime.getTime() + 90 * 60000); // Add 90 minutes
+    return new Date() > eventDateTimePlus90;
   };
 
   const getChronologicalEvents = (race) => {

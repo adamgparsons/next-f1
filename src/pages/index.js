@@ -1,32 +1,20 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { format } from "date-fns";
 import styled from "styled-components";
+import raceData from "../../data/f1_data.json";
 
 const F1 = () => {
   const [nextRace, setNextRace] = useState(null);
 
   useEffect(() => {
-    const getF1Data = async () => {
-      try {
-        const currentDate = new Date();
+    const currentDate = new Date();
 
-        const response = await axios.get("/api/proxy");
-        const races = response.data.MRData.RaceTable.Races;
+    const nextRace = raceData.MRData.RaceTable.Races.find(race => {
+      const raceDateTime = new Date(race.date + "T" + race.time);
+      return raceDateTime > currentDate;
+    });
 
-        const nextRace = races.find(race => {
-          const raceDate = new Date(race.date);
-          return raceDate > currentDate;
-        });
-
-        setNextRace(nextRace);
-
-      } catch (error) {
-        console.error("Error fetching F1 data:", error);
-      }
-    };
-
-    getF1Data();
+    setNextRace(nextRace);
   }, []);
 
   const isEventCompleted = (eventDate, eventTime) => {
@@ -92,11 +80,11 @@ const F1 = () => {
                     {formatEventType(event.type)}
                   </SubHeading>
                   <EventTime>
-                    <P>
+                    <P isEventCompleted={completed}>
                       {format(event.dateTime, "EEE dd MMMM")}
                     </P>
 
-                    <P>
+                    <P isEventCompleted={completed}>
                       {format(event.dateTime, "h:mmaa").toLowerCase()}
                     </P>
                   </EventTime>

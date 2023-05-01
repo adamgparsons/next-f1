@@ -1,6 +1,6 @@
 # Formula 1 Race Schedule
 
-This is a simple web application that displays the upcoming schedule for the current Formula 1 season.
+This is a simple web application that displays the upcoming weekend schedule for the current Formula 1 season.
 
 ## Technologies Used
 

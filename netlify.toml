@@ -1,6 +1,6 @@
 [build]
   command = "npm run build && npm run export"
-  publish = "out"
+  publish = "build"
 
 [context.production.environment]
   NETLIFY_SITE_ID = "9dc0a44b-04b1-4b2e-8772-170502a41c6d"

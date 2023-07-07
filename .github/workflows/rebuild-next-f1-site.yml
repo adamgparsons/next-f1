@@ -2,7 +2,7 @@ name: Rebuild next f1 site
 
 on:
   schedule:
-    - cron: "0 12 * * 2" # every Tuesday at 11am
+    - cron: "20 10 * * 5" # every Tuesday at 11am
 
 jobs:
   rebuild:
@@ -27,7 +27,8 @@ jobs:
         run: npm run build
 
       - name: Deploy website to Netlify
-        run: npm run deploy
-        env:
+        uses: jsmrcaga/action-netlify-deploy@v2.0.0
+        with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ env.NETLIFY_SITE_ID }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_DEPLOY_TO_PROD: true

@@ -2,7 +2,7 @@ name: Rebuild next f1 site
 
 on:
   schedule:
-    - cron: "20 10 * * 5" # every Tuesday at 11am
+    - cron: "41 10 * * 5" # every Tuesday at 11am
 
 jobs:
   rebuild:
